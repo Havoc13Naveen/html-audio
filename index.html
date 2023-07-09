@@ -1,18 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>Audio and Video List</title>
 </head>
-<h1>Welcome</h1>
-<label> select the option </label>
-<select > 
-<option value="Audio">Audio</option>
-<option value="Video">Video</option>
-</select>
 <body>
-    <audio controls src="bgm.mp3" ></audio>
-    <video controls src="video.mp4"></video>
+  <h1>Audio and Video List</h1>
+  
+  <select id="mediaSelector" onchange="showMedia()">
+    <option value="">Select Media Type</option>
+    <option value="audio">Audio</option>
+    <option value="video">Video</option>
+  </select>
+  
+  <div id="mediaList"></div>
+
+  <script>
+    function showMedia() {
+      var mediaSelector = document.getElementById("mediaSelector");
+      var mediaType = mediaSelector.value;
+      var mediaList = document.getElementById("mediaList");
+      
+      // Clear previous media list
+      mediaList.innerHTML = "";
+
+      if (mediaType === "audio") {
+        var audioList = [
+          { src: "bgm.mp3", title: "Audio" },
+          // Add more audio items as needed
+        ];
+        
+        for (var i = 0; i < audioList.length; i++) {
+          var audioItem = audioList[i];
+          var audioElement = document.createElement("audio");
+          audioElement.src = audioItem.src;
+          audioElement.controls = true;
+          var audioTitle = document.createElement("p");
+          audioTitle.innerHTML = audioItem.title;
+          mediaList.appendChild(audioTitle);
+          mediaList.appendChild(audioElement);
+        }
+      } else if (mediaType === "video") {
+        var videoList = [
+          { src: "video.mp4", title: "Video" },
+          // Add more video items as needed
+        ];
+
+        for (var j = 0; j < videoList.length; j++) {
+          var videoItem = videoList[j];
+          var videoElement = document.createElement("video");
+          videoElement.src = videoItem.src;
+          videoElement.controls = true;
+          var videoTitle = document.createElement("p");
+          videoTitle.innerHTML = videoItem.title;
+          mediaList.appendChild(videoTitle);
+          mediaList.appendChild(videoElement);
+        }
+      }
+    }
+  </script>
 </body>
 </html>
